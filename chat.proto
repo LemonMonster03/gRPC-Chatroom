@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package chat;
+
+message RegisterMsg {
+  string userName = 1;
+}
+
+message RegisterResponse {
+  bool status = 1;
+  string reason = 2;
+  repeated string OnlineList = 3;
+}
+
+message ChatMsg {
+  string send_name = 1;
+  string recv_name = 2;
+  string content = 3;
+}
+
+service ChatService {
+  rpc Register(RegisterMsg) returns (RegisterResponse);
+  rpc Chat(stream ChatMsg) returns (stream ChatMsg);
+}
+
+
